@@ -1,9 +1,11 @@
+const { auth } = require('express-openid-connect');
+
 const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'https://estudiante-railway-production.up.railway.app/',
-  clientID: 'UeXMJQBGZXze7DgWvNBt7sOvpYjd2Fw9',
+  baseURL: 'https://estudiante-railway-production.up.railway.app',
+  clientID: 'aP0glnG88Bhj49aztGJqLCRpGxjZN7OF',
   issuerBaseURL: 'https://metacafetery.us.auth0.com'
 };
 
