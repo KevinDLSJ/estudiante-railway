@@ -2,7 +2,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://estudiante-railway-production.up.railway.app/',
   clientID: 'UeXMJQBGZXze7DgWvNBt7sOvpYjd2Fw9',
   issuerBaseURL: 'https://metacafetery.us.auth0.com'
 };
