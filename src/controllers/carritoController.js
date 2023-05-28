@@ -109,9 +109,11 @@ let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2
 
 function recp(req,res) {
   const id = req.params.id
+
       req.getConnection((err, conn) => {
         //selecciona la tabla de carrito
         conn.query('SELECT a.folio,a.fecha,a.status,a.corre_emp,a.correo_clie,b.cantidad,b.precio,c.name FROM pedido a,detalle b, product c WHERE a.folio = ? AND a.folio = b.folio AND b.id_producto = c.id_producto',[id],(err,ped)=>{
+          if(err) throw err
             req.getConnection((err,conn) => {
               conn.query('SELECT SUM(cantidad*precio) FROM detalle WHERE folio =?',[id],(err,tota) =>{
                 const to = tota[0]["SUM(cantidad*precio)"]
