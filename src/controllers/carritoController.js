@@ -90,9 +90,10 @@ let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2
         //selecciona la tabla de carrito
         conn.query('SELECT * FROM pedido',(err,data)=>{
           if(err) throw err
-          const nump = data.length
+          const nump = data.length - 1
+          const num = data[nump][0]
           req.getConnection((err,conn) =>{
-            conn.query('INSERT INTO detalle (folio,id_producto,cantidad,precio) SELECT ?,a.id_producto,a.cantidad,b.precio FROM carrito a, product b WHERE a.id_usuario = ? AND a.id_producto = b.id_producto',[nump,name],(err,re) =>{
+            conn.query('INSERT INTO detalle (folio,id_producto,cantidad,precio) SELECT ?,a.id_producto,a.cantidad,b.precio FROM carrito a, product b WHERE a.id_usuario = ? AND a.id_producto = b.id_producto',[num,name],(err,re) =>{
               if (err) throw err
               req.getConnection((err,conn) => {
                 conn.query('DELETE FROM carrito WHERE id_usuario = ?',[name],(err,rowa) => {
