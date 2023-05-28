@@ -98,7 +98,7 @@ let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2
               if (err) throw err
               req.getConnection((err,conn) => {
                 conn.query('DELETE FROM carrito WHERE id_usuario = ?',[name],(err,rowa) => {
-                  res.redirect('/pedido/'+nump)
+                  res.redirect('/pedido/'+num)
                 })
               })
             })
