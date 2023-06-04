@@ -3,7 +3,7 @@ function indexcr(req, res) {
   const name = req.oidc.user.email
   req.getConnection((err, conn) => {
     //hace una consulta en la base de datos y recupera la informacion consultado
-    conn.query('SELECT a.id_producto, a.id_usuario, b.name, a.cantidad, b.precio, b.imagen FROM carrito a, product b  WHERE a.id_producto=b.id_producto and a.id_usuario=?', [name],(err, pers) => {
+    conn.query('SELECT a.id_producto, a.id_usuario, b.name, a.cantidad, b.precio FROM carrito a, product b  WHERE a.id_producto=b.id_producto and a.id_usuario=?', [name],(err, pers) => {
       if (err) {  
         res.json(err);
       }
