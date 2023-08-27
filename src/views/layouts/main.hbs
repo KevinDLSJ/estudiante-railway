@@ -1,3 +1,34 @@
+<style>
+  .imagen{
+    margin-top: 1px;
+  }
+  .contador{
+    
+    width: 110px;
+    height: 95px;
+    
+  }.texto-carrito{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    margin-left: 1rem;
+
+  }.contador-productos{
+    color:rgb(255, 255, 255);
+    margin-left: -10px;
+    margin-top: -55px;
+    position: relative;
+    font-size: large;
+    /*background-color: black;
+    width:30px ;
+    height: 30px;  
+    border-radius: 50%;*/
+    text-align: center;    
+    color: black;    
+  }
+</style>
+
+
+
 <!--Indica la versión de HTML que se usó para escribir el documento e idioma.-->
 <!DOCTYPE html>
 <html lang="es">
@@ -24,16 +55,35 @@
       </div>
       <!--Imagen del encabezado-->
       <img class="img-fluid" src="https://cdn-icons-png.flaticon.com/512/2734/2734039.png" width="80px" height="80px" />
+      
+
+
       <ul class="w-1/2 px-1 ml-auto flex justify-end pt-1">
       <!--si el nombre es correcto apareceran los siguientes 3 botones -->
         {{#if name}}
+        <div class="contador">
+          <button class="boton-compra">
+            <div class="imagen">
+              <svg xmlns="http://www.w3.org/2000/svg" width="100px" height="50px" fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16">
+                <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+              </svg>
+                </div>
+                  <a href="/carrito" class="text-decoration-none text-white">Carrito</a>
+
+          </button>                      
+          
+              <div class="contador-productos">
+                {{#if contador}}
+                <span>{{contador}}</span>
+                {{/if}}
+              </div>
+              
+        </div>
+          
+  
           <li class="nav-item px-4">
             <!--boton que re dirige al login-->
-            <a href="/carrito" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-4 rounded-pill">Carrito</a>
-          </li>
-          <li class="nav-item px-4">
-            <!--boton que re dirige al login-->
-            <a href="/login" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-4 rounded-pill">Menú</a>
+            <a href="/login" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-3 rounded-pill">Menú</a>
 
           </li>
           <li class="nav-item px-4">
@@ -45,11 +95,18 @@
           <h6><font size="3" color="white" >{{name}}</font></h6>
           <!--si no es correcto se mostrara el siguiente boton-->
         {{else}}
-          <li class="nav-item px-4">
+         <li class="nav-item px-4">
             <!--boton que re dirige al login-->
-            <a href="/login" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-4 rounded-pill">Inicio</a>
+            <a href="/logout" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-4 rounded-pill">Logout</a>
 
           </li>
+
+          <li class="nav-item px-4">
+            <!--boton que re dirige al login-->
+            <a href="/login" class="text-white hover:text-black nav-link font-semibold border-2 border-white hover:bg-yellow-800 py-3 px-4 rounded-pill">Volver</a>
+
+          </li>
+          
 
         {{/if}}
       </ul>

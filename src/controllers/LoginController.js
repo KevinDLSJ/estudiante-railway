@@ -93,6 +93,10 @@ function logout(req, res) {
   res.redirect('/login');
 }
 
+function mensaje(req, res){
+  res.render('pages/mensaje')
+}
+
 
 //se exportan las funciones globalmente 
 module.exports = {
@@ -101,6 +105,6 @@ module.exports = {
   auth: auth,
   logout: logout,
   storeUser: storeUser,
-
+  mensaje,
 }
 

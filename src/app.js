@@ -4,7 +4,7 @@ console.log('iniciando');
 const express = require('express');
 const { engine } = require('express-handlebars');
 const myconnection = require('express-myconnection');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const { Session } = require('express-session');
@@ -42,6 +42,7 @@ const config = {
 
 //Definición de las rutas de acceso a procesos 
 const loginRoutes = require('./routes/login');
+const { alert } = require('./controllers/LoginController');
 
 // creacion de la aplicación y asignación del puerto 
 const app = express();
@@ -106,22 +107,30 @@ app.get('/', (req,res) => {
 
             //console.log('error')
             
-            res.redirect('/logout')
-        }else{
+            res.redirect('/mensaje')
+         }//
+         else{
             //req.session.email = req.oidc.name.email
             req.getConnection((err, conn) => {
                 conn.query('SELECT  a.costo, a.unidad, a.id_producto, a.name, b.descripcion, a.precio, c.description, a.imagen FROM product a, articulo b, units c WHERE a.tipo_art=b.tipo_art and a.unidad=c.unidad ORDER BY `name` ASC', (err, pers) => {
-                  if(err) {
-                    res.json(err);
-                  }
-                  console.log("--------",pers)
-                  res.render('pages/menu',{name: req.oidc.user.name,pers});
+                  req.getConnection((err,conn) => {
+                    conn.query('SELECT SUM(cantidad) AS canti FROM carrito WHERE id_usuario=?',[req.oidc.user.email],(err,cant)=>{
+                      let contador = cant[0].canti
+                      console.log(contador)
+                      if(err) {
+                        res.json(err);
+                      }
+                      console.log("--------",pers)
+                      res.render('pages/menu',{name: req.oidc.user.name,pers,contador});
+                    })
+                  })
                 });
               });       
              }      
     } else {
         console.log("NO autenticado");
-        res.redirect('/login');
+        res.redirect('/login');    
+        
     }
 })
 
