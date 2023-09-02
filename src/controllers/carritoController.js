@@ -28,7 +28,7 @@ function agregar(req, res) {
         req.getConnection((err, conn) => {
           conn.query('UPDATE carrito SET cantidad = ? WHERE id_producto= ? AND id_usuario = ?', [can, data.id_producto, name], (err, carr) => {
             if (err) throw err;
-            res.redirect('/')
+            res.redirect('/carrito')
           });
         });
       } else {
@@ -84,7 +84,7 @@ function pedido(req, res){
 let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
   req.getConnection((err, conn) => {
     //selecciona la tabla de carrito
-    conn.query("INSERT INTO pedido (fecha,status,corre_emp,correo_clie) VALUES (?,'U','nulo',?)",[datenow,name],(err,row)=>{
+    conn.query("INSERT INTO pedido (fecha,status,corre_emp,correo_clie) VALUES (?,'P','nulo',?)",[datenow,name],(err,row)=>{
       if(err) throw err
       req.getConnection((err, conn) => {
         //selecciona la tabla de carrito
@@ -126,6 +126,11 @@ function recp(req,res) {
         })})
 }
 
+function barra(req, res){
+  const status = req.status
+  req.query('SELECT a.folio,a.fecha,a.status,a.corre_emp,a.correo_clie,b.cantidad,b.precio,c.name FROM pedido a,detalle b, product c WHERE a.folio = ? AND a.folio = b.folio AND b.id_producto = c.id_producto',)
+
+}
 //se exportan las funciones globalmente 
 module.exports = {
   indexcr,
@@ -133,4 +138,5 @@ module.exports = {
   elimina,
   pedido,
   recp,
+  barra,
 }
