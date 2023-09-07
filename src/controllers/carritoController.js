@@ -28,7 +28,7 @@ function agregar(req, res) {
         req.getConnection((err, conn) => {
           conn.query('UPDATE carrito SET cantidad = ? WHERE id_producto= ? AND id_usuario = ?', [can, data.id_producto, name], (err, carr) => {
             if (err) throw err;
-            res.redirect('/carrito')
+            res.redirect('/')
           });
         });
       } else {
@@ -37,7 +37,6 @@ function agregar(req, res) {
           conn.query('INSERT INTO carrito SET id_producto = ?, id_usuario = ?,cantidad = 1', [data.id_producto, name], (err, carr) => {
             if (err) throw err;
             res.redirect('/');
-
           });
         });
       }
@@ -81,7 +80,7 @@ function elimina(req, res) {
 function pedido(req, res){
   const name = req.oidc.user.email
   let date = new Date();
-let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+  let datenow =  date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
   req.getConnection((err, conn) => {
     //selecciona la tabla de carrito
     conn.query("INSERT INTO pedido (fecha,status,corre_emp,correo_clie) VALUES (?,'Pendiente','nulo',?)",[datenow,name],(err,row)=>{
@@ -126,12 +125,25 @@ function recp(req,res) {
         })})
 }
 
-function barra(req, res){
-  const status = req.status
-  req.getConnection((err, conn)=>{
-    req.query('SELECT a.folio,a.fecha,a.status,a.corre_emp,a.correo_clie,b.cantidad,b.precio,c.name FROM pedido a,detalle b, product c WHERE a.folio = ? AND a.folio = b.folio AND b.id_producto = c.id_producto',[id],)
+function agregacarrito(req, res){
+  const data = req.body
+  const name = req.oidc.user.email
 
+  req.getConnection((err, conn) => {
+    conn.query('SELECT * FROM carrito WHERE id_producto = ? AND id_usuario = ?', [data.id_producto, name], (err, rows) => {
+      //valida si ya existe el producto, si es asi se actualiza la columna de cantidad agregando una unidad mas
+      if (rows.length > 0) {
+        const can = rows[0].cantidad + 1
+        req.getConnection((err, conn) => {
+          conn.query('UPDATE carrito SET cantidad = ? WHERE id_producto= ? AND id_usuario = ?', [can, data.id_producto, name], (err, carr) => {
+            if (err) throw err;
+            res.redirect('/carrito')
+          });
+        });
+      }
+    })
   })
+      
 
 }
 //se exportan las funciones globalmente 
@@ -141,5 +153,5 @@ module.exports = {
   elimina,
   pedido,
   recp,
-  barra,
+  agregacarrito,
 }

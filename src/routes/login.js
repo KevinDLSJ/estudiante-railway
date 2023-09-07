@@ -10,14 +10,15 @@ router.get('/register', LoginController.register);
 router.post('/register', LoginController.storeUser);
 router.post('/login', LoginController.auth);
 router.get('/logout', LoginController.logout);
-router.get('/mensaje', LoginController.mensaje)
+router.get('/mensaje', LoginController.mensaje);
 
 
 router.get('/carrito', carritoController.indexcr);
 router.post('/pers/agregar', carritoController.agregar);
 router.post('/pers/elimina', carritoController.elimina);
-router.get('/comprar', carritoController.pedido)
-router.get('/pedido/:id',carritoController.recp)
+router.get('/comprar', carritoController.pedido);
+router.get('/pedido/:id',carritoController.recp);
+router.post('/pers/agregacarrito', carritoController.agregacarrito);
 
 
 module.exports = router;
