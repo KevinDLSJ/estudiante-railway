@@ -119,7 +119,7 @@ function recp(req,res) {
             req.getConnection((err,conn) => {
               conn.query('SELECT SUM(cantidad*precio) FROM detalle WHERE folio =?',[id],(err,tota) =>{
                 const to = tota[0]["SUM(cantidad*precio)"]
-                res.render('pages/compra',{ped,total: to})
+                res.render('pages/compra',{ped,total: to, name: req.oidc.user.name})
               })
             })
         })})

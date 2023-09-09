@@ -22,11 +22,11 @@
     display: flex;
     justify-content: center;
     padding: 40px 0;
-  
+
   }
 
   .btn {
-  
+
     background-color: rgb(14, 14, 189);
     color: white;
     border-radius: 8px;
@@ -38,48 +38,55 @@
   .btn:hover {
     background-color: blue;
     color: white;
-  }td{
+  }
+
+  td {
     font-size: x-large;
     font-family: Arial, Helvetica, sans-serif;
-  }div .Tproducto{
+  }
+
+  div .Tproducto {
     margin-right: 350px;
     color: rgb(0, 0, 0);
     font-size: 200px;
-    
-    
-  }div.Tcantidad{
+
+
+  }
+
+  div.Tcantidad {
     margin-left: 200px;
     margin-top: -44px;
     color: rgb(0, 0, 0);
 
   }
-  div.titulo-ticket{
+
+  div.titulo-ticket {
     /*font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
     font-family: Arial, Helvetica, sans-serif;
 
-  }div .Ttotal{
+  }
+
+  div .Ttotal {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }h3{
+  }
+
+  h3 {
     font-size: 40px;
-  }div.Tprecio{
+  }
+
+  div.Tprecio {
     font-family: Arial, Helvetica, sans-serif;
-    margin-left: 500px; 
+    margin-left: 500px;
     margin-top: -48px;
   }
- 
- #progress {
-  position: relative;
-  width: 100%;
-  height: 30px;
-  background-color: #ddd;
-}
 
-#barra {
-  position: absolute;
-  width: 5%;
-  height: 100%;
-  background-color: #4CAF50;
-}
+  div .Tstatus {
+    margin-right: 680px;
+    color: rgb(0, 0, 0);
+    font-size: 200px;
+
+
+  }
 </style>
 
 
@@ -98,12 +105,18 @@
     <div class="ticket">
       <table class="table-fixed w-full">
         <thead>
+          <div class="text">
+            <img src="https://cdn-icons-png.flaticon.com/512/2734/2734039.png" width="80" height="80" alt="">
+          </div>
           <div class="titulo-ticket">
-            <h1 >Ticket de Compra</h1>
+            <h1>Ticket de Compra</h1>
           </div>
         </thead>
-  
+
         <hr>
+        <div class="Tstatus">
+          <h2>Status</h2>
+        </div>
         <div class="Tproducto">
           <h2 style="font-family: Arial, Helvetica, sans-serif;">Producto</h2>
 
@@ -114,7 +127,7 @@
         <div class="Tprecio">
           <h2>Precio</h2>
         </div>
-        
+
         {{#each ped}}
         <tr>
           <!--obtiene la informacion de la base de datos y la imprime en la tabla--->
@@ -127,11 +140,11 @@
           <td class="p-4 px-3 bg-gray-300...">{{cantidad}}</td>
           <!--muestra el costo del producto-->
           <td class="py-5 px-3 flex bg-blue-500...">{{precio}}</td>
-          
+
 
           {{/each}}
           </tbody>
-       </tr>
+        </tr>
 
       </table>
       <div class="Ttotal">
@@ -141,19 +154,19 @@
       <div class="TQR">
         <h1 style="font-size: xx-large;">Codigo QR</h1>
       </div>
-      
 
-      <div class="contenedor" >
+
+      <div class="contenedor">
         <div id="contenedorQR" class="contenedorQR"></div>
       </div>
   </center>
   </div>
   </tr>
-     <center>
-        <div class="texto-gracias">
-          <h1></h1>
-        </div>
-     </center>
+  <center>
+    <div class="texto-gracias">
+      <h1></h1>
+    </div>
+  </center>
 </body>
 
 <!--<body>
@@ -198,4 +211,5 @@
   }
   }
 </script>-->
-</html >
+
+</html>

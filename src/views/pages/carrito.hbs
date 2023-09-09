@@ -1,43 +1,20 @@
 <style>
-  /*imangen boton elimina,agrega*/
-  svg,
-  path {
-    color: #ffffff;
-    width: 23px;
-    height: 23px;
-  }
+  .boton-compra {
+    margin-top: 2rem;
 
-  .error h2 {
-    color: #000000;
-    font-size: 25px;
-    font-family: ;
-  }
 
-  .boton-comprar {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: xx-large;
-    margin-top: 25px;
-    background-color: #0254eb;
-    /*#0254eb*/
-    color: #ffffff;
-    width: 250px;
-    height: 40px;
-    border-radius: 8px;
-    box-shadow: 1px 1px 20px 1px gray;
-    text-decoration: none;
-    text-align: center;
-    margin-left: 950px;
 
 
   }
 
-  .boton-comprar:hover {
-    background-color: #2b6ee9;
-    ;
+  .cantidad {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    width: 1px;
   }
 
-  .texto-boton {
-    margin-top: 7px;
+  .boton-agrega {
+    margin-left: -120px;
 
   }
 </style>
@@ -72,26 +49,42 @@
 
 
       {{#if pers}}
+
       <!--Tabla creada-->
       <table class="table">
-        <thead class="table-dark">
-          <!--informacion en el encabezado de la tabla -->
-          <tr class="">
+        <thead class="table-dark w-auto">
+          <tr class="w-100">
 
-            <th class="w-1/4 py-4 px-2  ...">Producto</th>
-            <th class="w-5 py-2 px-2..."></th>
-            <th class="w-5 py-4 px-5...">Cantidad</th>
-            <th class="w-5 py-2 px-2..."></th>
+            <!--<th >Usuario</th>-->
+            <th class="px-4 h5 mw-10">Producto</th>
+            <th class="h5"> Precio/Unitario</th>
+
+
+            <th></th>
+
+
+            <th class="h5 w-10">Cantidad</th>
+            <th></th>
+
 
           </tr>
         </thead>
         {{#each pers}}
         <tr>
-          <!--obtiene la informacion de la base de datos y la imprime en la tabla--->
+          <!--obtiene la informacion de la base de datos y la imprime en la tabla-->
+          <!--<td class="h4">{{id_usuario}}</td>-->
 
-          <td class="p-3 h3">{{name}}</td>
-          <td class="p-3 bg-pink-500...">
+          <td class=" w-20 h4 px-4 py-3">{{name}}</td>
+
+
+          <td class="h4 px-1 py-3 w-10">{{precio}}</td>
+
+
+
+
+          <td class="px-1 py-3 w-10">
             <!--boton para eliminar producto con metodo delete-->
+
             <form action="/pers/elimina" method="POST">
               <input type="hidden" value="{{id_producto}}" name="id_producto">
               <button class="bg-red-600 text-white px-3 py-2 rounded-sm hover:bg-red-700" type="submit">
@@ -100,28 +93,47 @@
                   <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z" />
                 </svg>
             </form>
+
+
+
           </td>
           <!--muestra la cantidad de unidades hay en el carrito-->
-          <td class="p-4 px-5 h3">{{cantidad}}</td>
+          <div class="cantidad">
+            <td class=" px-1 py-3 h4">{{cantidad}}</td>
 
-          <td class=" bg-pink-500...">
+          </div>
+
+
+
+
+
+
+
+
+
+          <td class=" w-25 py-3 px-1">
             <!--agrega un producto mas al la cantidad total-->
-            <form action="/pers/agregacarrito" method="POST" class="mx-2">
-              <input type="hidden" value="{{id_producto}}" name="id_producto">
-              <button class="bg-green-600 text-white px-3 py-2 rounded-sm hover:bg-green-700" type="submit">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
-                  viewBox="0 0 16 16">
-                  <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-              </button>
-            </form>
-          </td>
-          <!--muestra el costo del producto-->
-          <!--<td class="p-4 flex bg-blue-500...">{{costo}}</td>-->
+            <div class="boton-agrega">
+              <form action="/pers/agregacarrito" method="POST" class="mx-2">
+                <input type="hidden" value="{{id_producto}}" name="id_producto">
+                <button class="bg-green-600 text-white px-3 py-2 rounded-sm hover:bg-green-700" type="submit">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                    viewBox="0 0 16 16">
+                    <path
+                      d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                  </svg>
+                </button>
+              </form>
 
-          {{/each}}
-          </tbody>
+            </div>
+
+          </td>
+
+          <!--muestra el costo del producto-->
+
+        </tr>
+        {{/each}}
+        </tbody>
 
       </table>
     </div>
@@ -129,17 +141,18 @@
 
       <form class="mx-2">
         <input type="hidden" name="id_compra">
-        <a href="/comprar" class="boton-comprar" type="submit">
-          <h5 class="texto-boton">Comprar ahora</h5>
+        <a href="/comprar" class="btn btn-success btn-lg" type="submit">
+          <h5>Comprar ahora</h5>
         </a>
       </form>
+
 
     </div>
 
     {{else}}
     <div class="error">
       <center>
-        <h2 class="text-red-500 font-bold text-lg my-3">El carrito se encuentra vacio</h2>
+        <h2>El carrito se encuentra vacio</h2>
       </center>
 
     </div>
