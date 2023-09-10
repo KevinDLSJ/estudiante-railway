@@ -1,215 +1,138 @@
 <style>
-  /*caracteristicas ddel ticket*/
-  .ticket {
-    width: 47%;
-    background-color: #fdfdfd;
-    margin-top: 1rem;
-    border-radius: 10px;
-    box-shadow: 1px 1px 20px 6px rgba(167, 162, 162, 0.945);
-    font-size: 25.5vw;
-    margin: 30px;
-  }
+  .container-status {
+    position: relative;
+    left: 70%;
+    top: 40%;
 
-  /*caracteristicas de titulo ticket*/
-  h5 {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: 1rem;
-    font-size: xx-large;
-  }
-
-  /*caracteristicas del contenedor del qr*/
-  .contenedorQR {
-    display: flex;
-    justify-content: center;
-    padding: 40px 0;
-
-  }
-
-  .btn {
-
-    background-color: rgb(14, 14, 189);
-    color: white;
-    border-radius: 8px;
-    box-shadow: 1px 1px 1px 1px gray;
+    position: fixed;
     width: 200px;
-    height: 50px;
+    height: 100px;
+
   }
 
-  .btn:hover {
-    background-color: blue;
-    color: white;
+  .boton-status {
+    margin-top: 2rem;
+    margin-left: 4rem;
+    font-family: Arial, Helvetica, sans-ser
   }
 
-  td {
-    font-size: x-large;
+  .status {
+    position: relative;
+    right: 38%;
+
+  }
+
+  .Tproducto {
+    position: relative;
+    right: 10%;
+  }
+
+  tbody.detalle {
+
+    position: relative;
+    left: 12%;
+    margin-top: 5rem;
+
+  }
+
+  tbody {
     font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    right: 10%;
+    margin-bottom: 2rem;
   }
 
-  div .Tproducto {
-    margin-right: 350px;
-    color: rgb(0, 0, 0);
-    font-size: 200px;
 
 
-  }
 
-  div.Tcantidad {
-    margin-left: 200px;
-    margin-top: -44px;
-    color: rgb(0, 0, 0);
+  .contenedor-qr {
+    width: 250px;
+    height: 300px;
 
-  }
+    background-color: #ffff;
+    position: fixed;
 
-  div.titulo-ticket {
-    /*font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;*/
-    font-family: Arial, Helvetica, sans-serif;
+    left: 50%;
+    top: 30%;
+    margin-left: 18rem;
+
+
 
   }
 
-  div .Ttotal {
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  }
-
-  h3 {
-    font-size: 40px;
-  }
-
-  div.Tprecio {
-    font-family: Arial, Helvetica, sans-serif;
-    margin-left: 500px;
-    margin-top: -48px;
-  }
-
-  div .Tstatus {
-    margin-right: 680px;
-    color: rgb(0, 0, 0);
-    font-size: 200px;
-
-
+  div.card {
+    position: relative;
+    left: 20%;
   }
 </style>
 
 
 
-
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
-
 </head>
-
 <body>
-  <center>
-    <div class="ticket">
-      <table class="table-fixed w-full">
-        <thead>
-          <div class="text">
-            <img src="https://cdn-icons-png.flaticon.com/512/2734/2734039.png" width="80" height="80" alt="">
-          </div>
-          <div class="titulo-ticket">
-            <h1>Ticket de Compra</h1>
-          </div>
-        </thead>
+  <div class="card" style="width: 40rem; margin-top:  2rem;">
+    <img src="https://cdn-icons-png.flaticon.com/512/2734/2734039.png" class="rounded mx-auto d-block" alt="..."
+      width="300" height="200">
+    <div class="card-body">
+      <h5 class="card-title fs-1 text-center">Ticket de Compra</h5>
+      <hr>
 
-        <hr>
-        <div class="Tstatus">
-          <h2>Status</h2>
-        </div>
-        <div class="Tproducto">
-          <h2 style="font-family: Arial, Helvetica, sans-serif;">Producto</h2>
+    </div>
+    <table class="table-fixed w-full">
+      <thead>
 
-        </div>
-        <div class="Tcantidad">
-          <h2 style="font-family: Arial, Helvetica, sans-serif;">Cantidad</h2>
-        </div>
-        <div class="Tprecio">
-          <h2>Precio</h2>
-        </div>
+      </thead>
+      <tr>
+        <th class="px-2"></th>
 
+        <th scope=" " class="fs-3 ">Status</th>
+
+        <th scope=" " class="fs-3 ">Producto</th>
+
+        <th scope=" " class="fs-3 ">Cantidad</th>
+
+        <th scope=" " class="fs-3 ">Precio</th>
+      </tr>
+      <tbody class="detalle">
         {{#each ped}}
         <tr>
-          <!--obtiene la informacion de la base de datos y la imprime en la tabla--->
-          <td class="py-1 px-1 bg-red-500...">{{status}}</td>
-          <td class="py-3  bg-green-500...">{{name}}</td>
-          <td class="p-3 bg-pink-500...">
-            <!--boton para eliminar producto con metodo delete-->
-          </td>
+          <!--obtiene la informacion de la base de datos y la imprime en la tabla-->
+          <td class="text-center fs-4 py-2">{{status}}</td>
+          <td class="text-center fs-4 px-1">{{name}}</td>
+
+          <!--boton para eliminar producto con metodo delete-->
+
           <!--muestra la cantidad de unidades hay en el carrito-->
-          <td class="p-4 px-3 bg-gray-300...">{{cantidad}}</td>
+          <td class="text-center fs-4">{{cantidad}}</td>
           <!--muestra el costo del producto-->
-          <td class="py-5 px-3 flex bg-blue-500...">{{precio}}</td>
+          <td class="text-center fs-4">{{precio}}</td>
 
 
           {{/each}}
-          </tbody>
-        </tr>
+      </tbody>
+      </tr>
+      </tbody>
 
-      </table>
-      <div class="Ttotal">
-        <h3>Total: {{total}}</h3>
-      </div>
-      <hr>
-      <div class="TQR">
-        <h1 style="font-size: xx-large;">Codigo QR</h1>
-      </div>
+    </table>
+    <hr>
+      <h1 class="text-center">Total: {{total}}</h1>   
 
-
-      <div class="contenedor">
-        <div id="contenedorQR" class="contenedorQR"></div>
-      </div>
-  </center>
   </div>
-  </tr>
-  <center>
-    <div class="texto-gracias">
-      <h1></h1>
-    </div>
-  </center>
-</body>
-
-<!--<body>
-
-<h1></h1>
-{{#each ped}}
-<div id="progress">
-  <div id="barra">
-    <center>
-        <p>{{status}}</p>
-    </center>
+  <div class="contenedor-qr">
+    <div id="contenedorQR" class="contenedorQR"></div>
+    <h1 class="text-center">Codigo Qr</h1>
   </div>
-</div>
-{{/each}}
-<br>
-<center>
-  <!--<button onclick="move()" class="btn btn-success">Consultar</button>-->
-</center>
+  <script type="text/javascript">
+    var contenedorQR = document.getElementById('contenedorQR');
 
-<script type="text/javascript">
-  var contenedorQR = document.getElementById('contenedorQR');
+    var QR = new QRCode(contenedorQR);
 
-  var QR = new QRCode(contenedorQR);
+    QR.makeCode('https://estudiante-cafetery.up.railway.app/pedido/%7B%7Bped.[0].folio%7D%7D');
 
-  QR.makeCode('https://estudiante-cafetery.up.railway.app/pedido/{{ped.[0].folio}}');
-
-</script>
-<!--<script>
-  function move() {
-  var elem = document.getElementById("barra");   
-  var width = 1;
-  var id = setInterval(frame, 10);
-  function frame() {
-    if (width >= 100) {
-      clearInterval(id);
-      
-    } else {
-      width++; 
-      elem.style.width = width + '%'; 
-
-    }
-  }
-  }
-</script>-->
+  </script>
 
 </html>
