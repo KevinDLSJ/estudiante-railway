@@ -4,12 +4,12 @@ const bcrypt = require('bcrypt');
 //esta funcion sirve que al tener una sesion inciada ira a la raiz
 //pero si la condicion no se cumple renderizara al Login
 function index(req, res) {
-  console.log("Entre");
+  //console.log("Entre");
   if(req.oidc.isAuthenticated()){
-    console.log("Autentidado");
-  res.redirect("/");
+    //console.log("Autentidado");
+    res.redirect("/");
   } else{
-    console.log("NO autentidado");
+    //console.log("NO autentidado");
     res.render("/logout");
 
   }
@@ -38,7 +38,7 @@ function storeUser(req,res){
         res.render('login/register', {error: 'El usuario ya existe!'});
       } else {
         bcrypt.hash(data.password, 12).then(hash => {
-          console.log(hash);
+          //console.log(hash);
           data.password=hash;
           //console.log(data);
           req.getConnection((err,conn) => {
@@ -68,10 +68,10 @@ function auth(req, res) {
         userData.forEach(element => {
           bcrypt.compare(data.password,element.password, (err,isMatch) => {
             if(!isMatch){
-              console.log("out",userData);
+              //console.log("out",userData);
               res.render('login/index', {error: '¡La contraseña o el correo electrónico es Incorrecto!'});
             } else {
-              console.log("wellcome");
+              //console.log("wellcome");
               req.session.loggedin = true;
               req.session.name = element.name;
               res.redirect('/');

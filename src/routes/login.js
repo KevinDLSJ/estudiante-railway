@@ -3,6 +3,7 @@ const { requiresAuth } = require('express-openid-connect');
 const LoginController = require('../controllers/LoginController');
 const carritoController = require('../controllers/carritoController');
 const MenuController = require('../controllers/MenuController');
+const pedidoController = require('../controllers/pedidoController');
 
 const router = express.Router();
 
@@ -22,6 +23,10 @@ router.get('/pedido/:id',carritoController.recp);
 router.post('/pers/agregacarrito', carritoController.agregacarrito);
 
 router.post('/pers/busca', MenuController.busca);
+
+router.get('/pedidos',pedidoController.mostrar_ped);
+router.get('/menu',pedidoController.return_menu);
+router.post('/detalle',pedidoController.detalle);
 
 
 module.exports = router;

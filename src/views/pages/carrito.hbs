@@ -16,6 +16,15 @@
   .boton-agrega {
     margin-left: -120px;
 
+  }.subtotal{
+    font-weight: bold;
+    position: relative;
+    left: 22%;
+    bottom: 35px;
+    
+  }.texto-subtotal{
+    font-weight: bold;
+    margin-left: 1rem;
   }
 </style>
 
@@ -72,7 +81,7 @@
         {{#each pers}}
         <tr>
           <!--obtiene la informacion de la base de datos y la imprime en la tabla-->
-          <!--<td class="h4">{{id_usuario}}</td>-->
+         
 
           <td class=" w-20 h4 px-4 py-3">{{name}}</td>
 
@@ -134,8 +143,18 @@
         </tr>
         {{/each}}
         </tbody>
-
+        
+        
       </table>
+      <tfoot>
+        <div class="texto-subtotal">
+          <span class="fs-4">  Subtotal:</span>
+        </div>
+        <div class="subtotal">
+          <span class="fs-4">{{total}}<span>
+        </div>
+
+      </tfoot>
     </div>
     <div class="boton-compra">
 

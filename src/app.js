@@ -1,4 +1,4 @@
-console.log('iniciando');
+//console.log('iniciando');
 
 // Carga de librerias 
 const express = require('express');
@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 3000 ;
 const DB_HOST = process.env.DB_HOST || 'localhost';
 const DB_USER = process.env.DB_USER || 'root';
 const DB_PASSWORD = process.env.DB_PASSWORD || '';
-const DB_NAME = process.env.DB_NAME || 'sistema3';
-const DB_PORT = process.env.DB_PORT || 3306 ;
+const DB_NAME = process.env.DB_NAME || 'sistema34bd';
+const DB_PORT = process.env.DB_PORT || 3306;
 
 console.log(DB_HOST,' ',DB_NAME,' ',DB_PASSWORD,' ',DB_PORT,' ',DB_USER);
 
@@ -101,7 +101,7 @@ app.use('/',loginRoutes);
 app.get('/', (req,res) => {
     //if (req.session.loggedin == true) {
     if(req.oidc.isAuthenticated()) {
-        console.log(req.oidc.user)
+        //console.log(req.oidc.user)
         let val = /\w+@\w.+[edu]+\.mx/;
         if(!val.test(req.oidc.user.email)){
 
@@ -114,13 +114,13 @@ app.get('/', (req,res) => {
             req.getConnection((err, conn) => {
                 conn.query('SELECT  a.costo, a.unidad, a.id_producto, a.name, b.descripcion, a.precio, c.description, a.imagen FROM product a, articulo b, units c WHERE a.tipo_art=b.tipo_art and a.unidad=c.unidad ORDER BY `name` ASC', (err, pers) => {
                   req.getConnection((err,conn) => {
-                    conn.query('SELECT SUM(cantidad) AS canti FROM carrito WHERE id_usuario=?',[req.oidc.user.email],(err,cant)=>{
+                    conn.query('SELECT SUM(cantidad) AS canti FROM carrito WHERE email=?',[req.oidc.user.email],(err,cant)=>{
                       let contador = cant[0].canti
-                      console.log(contador)
+                      //console.log(contador)
                       if(err) {
                         res.json(err);
                       }
-                      console.log("--------",pers)
+                      //console.log("--------",pers)
                       res.render('pages/menu',{name: req.oidc.user.name,pers,contador});
                     })
                   })
@@ -128,7 +128,7 @@ app.get('/', (req,res) => {
               });       
              }      
     } else {
-        console.log("NO autenticado");
+        //console.log("NO autenticado");
         res.redirect('/login');    
         
     }
