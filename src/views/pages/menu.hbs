@@ -120,14 +120,15 @@
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title" style="font-size: xx-large;">{{name}}</h5>
-                            <p class="card-text" style="font-size: large;">{{presentacion}}</p>
-                            <p class="card-text" style="font-size: large;"> {{description}}</p>
-                            <p class="card-text" style="font-size: large;">Costo: ${{precio}}</p>
+                            <span class="fs-2">{{name}}</span>
+                            
+                            <p class="fs-5"> {{description}}</p>
+                            <p class="fs-5">Costo: ${{precio}}</p>
 
                             <center>
                                 <form action="/pers/agregar" method="post">
                                     <input type="hidden" value="{{id_producto}}" name="id_producto">
+                                    <input type="hidden" value="{{precio}}" name="precio"
                                     <input type="submit" value="Agregar al Carrito" class="btn btn-success btn-lg">
                                 </form>
                             </center>

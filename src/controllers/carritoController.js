@@ -30,12 +30,12 @@ function agregar(req, res) {
   //console.log("Nombre: ",name);
 
   req.getConnection((err, conn) => { 
-    conn.query('SELECT * FROM carrito WHERE id_producto = ? AND email = ?', [data.id_producto, name], (err, rows) => {
+    conn.query('SELECT * FROM carrito WHERE id_producto = ? AND email = ?, precio =?', [data.id_producto, name, data.precio], (err, rows) => {
       //valida si ya existe el producto, si es asi se actualiza la columna de cantidad agregando una unidad mas
       if (rows.length > 0) {
         const can = rows[0].cantidad + 1
         req.getConnection((err, conn) => {
-          conn.query('UPDATE carrito SET cantidad = ? WHERE id_producto= ? AND email = ?', [can, data.id_producto, name], (err, carr) => {
+          conn.query('UPDATE carrito SET cantidad = ? WHERE id_producto= ? AND email = ?, precio =?', [can, data.id_producto, name, data.precio], (err, carr) => {
             if (err) throw err;
             res.redirect('/')
           });
@@ -43,7 +43,7 @@ function agregar(req, res) {
       } else {
         //agrega los productos solicitados al carrito de compras por medio de los queries 
         req.getConnection((err, conn) => {
-          conn.query('INSERT INTO carrito SET id_producto = ?, email = ?,cantidad = 1', [data.id_producto, name], (err, carr) => {
+          conn.query('INSERT INTO carrito SET id_producto = ?, email = ?,cantidad = 1, precio =?', [data.id_producto, name, data.precio], (err, carr) => {
             if (err) throw err;
             res.redirect('/');
           });
